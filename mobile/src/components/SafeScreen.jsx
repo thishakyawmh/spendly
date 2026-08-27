@@ -1,17 +1,17 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { COLORS } from '../../constants/colors';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import React from "react";
+import { View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useSettings } from "../context/SettingsContext";
 
 const SafeScreen = ({ children }) => {
-    const insets = useSafeAreaInsets();
-    return (
-        <View style={{ paddingTop: insets.top, flex: 1, backgroundColor: COLORS.background }}>
-            {children}
-        </View>
-    )
-}
+  const insets = useSafeAreaInsets();
+  const { colors } = useSettings();
 
-export default SafeScreen
+  return (
+    <View style={{ paddingTop: insets.top, flex: 1, backgroundColor: colors.background }}>
+      {children}
+    </View>
+  );
+};
 
-const styles = StyleSheet.create({})    
+export default SafeScreen;

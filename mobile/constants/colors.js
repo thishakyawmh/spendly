@@ -1,62 +1,25 @@
 // constants/colors.js
-const coffeeTheme = {
-    primary: "#8B593E",
-    background: "#FFF8F3",
-    text: "#4A3428",
-    border: "#E5D3B7",
-    white: "#FFFFFF",
-    textLight: "#9A8478",
-    expense: "#E74C3C",
-    income: "#2ECC71",
-    card: "#FFFFFF",
-    shadow: "#000000",
+
+export const COLORS = {
+  primary: "#111111",            // Pure Black brand accent in Light Mode
+  primaryContainer: "#E5E7EB",   // Soft neutral gray pill backgrounds
+  onPrimaryContainer: "#111111", // Primary text contrast
+  background: "#F8FAF9",         // Warm white background
+  surface: "#FFFFFF",            // White card panels
+  surfaceVariant: "#F3F4F6",     // Neutral gray background panels
+  onSurface: "#1F2937",          // Primary slate-black text
+  onSurfaceVariant: "#4B5563",   // Secondary gray text
+  outline: "#E5E7EB",            // Soft gray borders
+  income: "#10B981",             // Emerald Green positive indicators
+  expense: "#EF4444",            // Coral Red negative indicators
+  card: "#FFFFFF",
+  white: "#FFFFFF",
+  text: "#1F2937",
+  textLight: "#4B5563",
+  border: "#E5E7EB",
+  shadow: "rgba(0, 0, 0, 0.03)",
+  secondary: "#4F7CAC",
+  warning: "#F59E0B",
 };
 
-const forestTheme = {
-    primary: "#2E7D32",
-    background: "#E8F5E9",
-    text: "#1B5E20",
-    border: "#C8E6C9",
-    white: "#FFFFFF",
-    textLight: "#66BB6A",
-    expense: "#C62828",
-    income: "#388E3C",
-    card: "#FFFFFF",
-    shadow: "#000000",
-};
-
-const purpleTheme = {
-    primary: "#6A1B9A",
-    background: "#F3E5F5",
-    text: "#4A148C",
-    border: "#D1C4E9",
-    white: "#FFFFFF",
-    textLight: "#BA68C8",
-    expense: "#D32F2F",
-    income: "#388E3C",
-    card: "#FFFFFF",
-    shadow: "#000000",
-};
-
-const oceanTheme = {
-    primary: "#0277BD",
-    background: "#E1F5FE",
-    text: "#01579B",
-    border: "#B3E5FC",
-    white: "#FFFFFF",
-    textLight: "#4FC3F7",
-    expense: "#EF5350",
-    income: "#26A69A",
-    card: "#FFFFFF",
-    shadow: "#000000",
-};
-
-export const THEMES = {
-    coffee: coffeeTheme,
-    forest: forestTheme,
-    purple: purpleTheme,
-    ocean: oceanTheme,
-};
-
-// 👇 change this to switch theme
-export const COLORS = THEMES.coffee;
+export const THEMES = { PersonalFinance: COLORS };
