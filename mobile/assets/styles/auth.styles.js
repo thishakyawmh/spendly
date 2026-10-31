@@ -50,7 +50,7 @@ export const getAuthStyles = (colors) =>
     },
     buttonText: {
       fontFamily: "GoogleSans-Medium",
-      color: colors.white,
+      color: colors.onPrimary || (colors.primary === "#FFFFFF" ? "#111111" : "#FFFFFF"),
       fontSize: 14,
       letterSpacing: 0.1,
     },

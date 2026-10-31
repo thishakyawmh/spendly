@@ -20,8 +20,8 @@ export const CURRENCIES = {
 
 const themePalettes = {
   monochrome: {
-    light: { primary: "#111111", primaryContainer: "#E5E7EB", onPrimaryContainer: "#111111" },
-    dark: { primary: "#FFFFFF", primaryContainer: "#2D2D3D", onPrimaryContainer: "#FFFFFF" },
+    light: { primary: "#111111", onPrimary: "#FFFFFF", primaryContainer: "#E5E7EB", onPrimaryContainer: "#111111" },
+    dark: { primary: "#FFFFFF", onPrimary: "#111111", primaryContainer: "#2D2D3D", onPrimaryContainer: "#FFFFFF" },
   },
 };
 

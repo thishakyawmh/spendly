@@ -256,7 +256,7 @@ export default function ProfileScreen() {
     },
     buttonText: {
       fontFamily: "GoogleSans-Medium",
-      color: colors.white,
+      color: colors.onPrimary || (colors.primary === "#FFFFFF" ? "#111111" : "#FFFFFF"),
       fontSize: 14,
       letterSpacing: 0.1,
     },
@@ -337,7 +337,7 @@ export default function ProfileScreen() {
               disabled={updatingName}
             >
               {updatingName ? (
-                <ActivityIndicator size="small" color={colors.white} style={{ marginRight: 8 }} />
+                <ActivityIndicator size="small" color={colors.onPrimary || (colors.primary === "#FFFFFF" ? "#111111" : "#FFFFFF")} style={{ marginRight: 8 }} />
               ) : null}
               <Text style={dynamicStyles.buttonText}>Save Info</Text>
             </TouchableOpacity>
@@ -378,7 +378,7 @@ export default function ProfileScreen() {
               disabled={updatingPassword}
             >
               {updatingPassword ? (
-                <ActivityIndicator size="small" color={colors.white} style={{ marginRight: 8 }} />
+                <ActivityIndicator size="small" color={colors.onPrimary || (colors.primary === "#FFFFFF" ? "#111111" : "#FFFFFF")} style={{ marginRight: 8 }} />
               ) : null}
               <Text style={dynamicStyles.buttonText}>Change Password</Text>
             </TouchableOpacity>

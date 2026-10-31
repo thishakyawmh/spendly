@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Platform } from "react-native";
+import { Platform, LogBox } from "react-native";
 import { Slot } from "expo-router";
 import SafeScreen from "../components/SafeScreen";
 import { ClerkProvider } from "@clerk/expo";
@@ -8,6 +8,11 @@ import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { SettingsProvider } from "../context/SettingsContext";
+
+LogBox.ignoreLogs([
+  "Clerk: Clerk has been loaded with development keys",
+  "Cannot connect to Expo CLI",
+]);
 
 SplashScreen.preventAutoHideAsync();
 
