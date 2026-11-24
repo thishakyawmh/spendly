@@ -1,0 +1,31 @@
+name: Spendly Backend CI
+
+on:
+  push:
+    branches: [main, "security/**"]
+    paths:
+      - "backend/**"
+      - ".github/workflows/backend-ci.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "backend/**"
+      - ".github/workflows/backend-ci.yml"
+
+jobs:
+  backend-validation:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies and synchronize lockfile
+        run: npm install --no-audit --no-fund
+      - name: Check JavaScript syntax
+        run: find . -path ./node_modules -prune -o -name '*.js' -type f -print0 | xargs -0 -n1 node --check
+      - name: Run tests
+        run: npm test
