@@ -9,6 +9,10 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5001;
 
+if (!process.env.CLERK_SECRET_KEY) {
+    throw new Error("CLERK_SECRET_KEY must be configured before starting the API");
+}
+
 app.use(express.json());
 
 app.set("trust proxy", 1);
