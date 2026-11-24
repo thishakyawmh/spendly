@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { useRouter } from "expo-router";
-import { useUser, useAuth } from "@clerk/expo";
+import { useAuth } from "@clerk/expo";
 import { useState } from "react";
 import { API_URL } from "../../../constants/api";
 import { styles } from "@/assets/styles/create.styles";
@@ -31,7 +31,6 @@ const CATEGORIES = [
 
 const CreateScreen = () => {
   const router = useRouter();
-  const { user } = useUser();
   const { getToken } = useAuth();
   const { colors, currencyInfo } = useSettings();
 
