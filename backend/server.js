@@ -9,6 +9,10 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5001;
 
+if (!process.env.CLERK_JWKS_URL || !process.env.CLERK_ISSUER) {
+    throw new Error("CLERK_JWKS_URL and CLERK_ISSUER must be configured before starting the API");
+}
+
 app.use(express.json());
 
 app.set("trust proxy", 1);
