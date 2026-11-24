@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { useRouter } from "expo-router";
-import { useUser } from "@clerk/expo";
+import { useUser, useAuth } from "@clerk/expo";
 import { useState } from "react";
 import { API_URL } from "../../../constants/api";
 import { styles } from "@/assets/styles/create.styles";
@@ -32,6 +32,7 @@ const CATEGORIES = [
 const CreateScreen = () => {
   const router = useRouter();
   const { user } = useUser();
+  const { getToken } = useAuth();
   const { colors, currencyInfo } = useSettings();
 
   const [title, setTitle] = useState("");
@@ -55,13 +56,16 @@ const CreateScreen = () => {
         ? -Math.abs(parseFloat(amount))
         : Math.abs(parseFloat(amount));
 
+      const token = await getToken();
+      if (!token) throw new Error("Your session has expired. Please sign in again.");
+
       const response = await fetch(`${API_URL}/transactions`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          user_id: user.id,
           title,
           amount: formattedAmount,
           category: selectedCategory,
