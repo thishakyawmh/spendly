@@ -12,7 +12,7 @@ import SwipeableRow from "../../components/SwipeableRow";
 
 export default function Page() {
   const { user } = useUser();
-  const { signOut } = useAuth();
+  const { signOut, getToken } = useAuth();
   const router = useRouter();
   const [refreshing, setRefreshing] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
@@ -20,7 +20,8 @@ export default function Page() {
   const { colors, currencyInfo, currency } = useSettings();
 
   const { transactions, summary, isLoading, loadData, deleteTransaction } = useTransactions(
-    user.id
+    user?.id,
+    getToken
   );
 
   const onRefresh = async () => {
