@@ -1,6 +1,5 @@
 import { createPublicKey, verify as verifySignature } from "node:crypto";
 
-const jwksCache = new Map();
 let cachedKeys = new Map();
 let cacheExpiresAt = 0;
 
@@ -21,7 +20,9 @@ async function getSigningKey(kid) {
       throw new Error("Invalid Clerk JWKS response");
     }
 
-    cachedKeys = new Map(jwks.keys.filter((key) => key.kid && key.kty === "RSA").map((key) => [key.kid, key]));
+    cachedKeys = new Map(jwks.keys
+      .filter((key) => key.kid && key.kty === "RSA" && (!key.use || key.use === "sig") && (!key.alg || key.alg === "RS256"))
+      .map((key) => [key.kid, key]));
     cacheExpiresAt = Date.now() + 10 * 60 * 1000;
   }
 
@@ -36,9 +37,9 @@ async function getSigningKey(kid) {
 export default async function requireClerkAuth(req, res, next) {
   try {
     const authorization = req.headers.authorization || "";
-    const [scheme, token] = authorization.split(" ");
+    const [scheme, token, ...extra] = authorization.trim().split(/\\s+/);
 
-    if (scheme !== "Bearer" || !token) {
+    if (scheme !== "Bearer" || !token || extra.length > 0) {
       return res.status(401).json({ message: "Authentication required" });
     }
 
@@ -72,7 +73,7 @@ export default async function requireClerkAuth(req, res, next) {
       !claims.sub ||
       typeof claims.exp !== "number" ||
       claims.exp <= now ||
-      (typeof claims.nbf === "number" && claims.nbf > now)
+      (claims.nbf !== undefined && (typeof claims.nbf !== "number" || claims.nbf > now))
     ) {
       return res.status(401).json({ message: "Invalid or expired authentication token" });
     }
