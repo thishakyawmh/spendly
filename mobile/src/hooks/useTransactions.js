@@ -23,6 +23,7 @@ export const useTransactions = (userId) => {
   const loadData = useCallback(async () => {
     if (!userId) {
       setTransactions([]);
+      setSummary({ balance: 0, income: 0, expense: 0, total_transactions: 0, categories: [] });
       setIsLoading(false);
       return;
     }
