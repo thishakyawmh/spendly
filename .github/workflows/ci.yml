@@ -2,7 +2,7 @@ name: CI
 
 on:
   pull_request:
-    branches: [main, master]
+    branches: [main, master, "audit/**"]
   push:
     branches: [main, master]
 
@@ -29,3 +29,7 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+      - name: Check JavaScript syntax
+        run: |
+          find . -path './node_modules' -prune -o -name '*.js' -print0 | xargs -0 -n1 node --check
