@@ -1,16 +1,19 @@
 import express from "express";
-import sql from "../config/db.js";
-import { getTransactionsByUserId, createTransaction, deleteTransaction, getSummaryByUserId } from "../controllers/transactionsController.js";
+import {
+    getTransactions,
+    createTransaction,
+    deleteTransaction,
+    getSummary,
+} from "../controllers/transactionsController.js";
+import requireAuth from "../middleware/requireAuth.js";
 
 const router = express.Router();
 
+router.use(requireAuth);
 
-router.get("/:userId", getTransactionsByUserId)
+router.get("/", getTransactions);
+router.get("/summary", getSummary);
+router.post("/", createTransaction);
+router.delete("/:id", deleteTransaction);
 
-router.post("/", createTransaction)
-
-router.delete("/:id", deleteTransaction)
-
-router.get("/summary/:userId", getSummaryByUserId)
-
-export default router
+export default router;
