@@ -37,7 +37,7 @@ async function getSigningKey(kid) {
 export default async function requireClerkAuth(req, res, next) {
   try {
     const authorization = req.headers.authorization || "";
-    const [scheme, token, ...extra] = authorization.trim().split(/\\s+/);
+    const [scheme, token, ...extra] = authorization.trim().split(/\s+/);
 
     if (scheme !== "Bearer" || !token || extra.length > 0) {
       return res.status(401).json({ message: "Authentication required" });
