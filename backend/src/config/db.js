@@ -3,7 +3,10 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-//Create SQL connection
+// Create the SQL connection only when the connection string is configured.
+if (!process.env.DATABASE_URL) {
+    throw new Error("DATABASE_URL is required");
+}
 const sql = neon(process.env.DATABASE_URL);
 
 export async function initDB() {
