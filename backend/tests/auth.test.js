@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { generateKeyPairSync, sign } from "node:crypto";
+import { generateKeyPairSync, sign, createPublicKey } from "node:crypto";
 import requireClerkAuth from "../src/middleware/requireClerkAuth.js";
 
 const issuer = "https://example.clerk.accounts.dev";
@@ -13,7 +13,7 @@ const jwk = createJwk(publicKey);
 const originalFetch = globalThis.fetch;
 
 function createJwk(pem) {
-  const key = require("node:crypto").createPublicKey(pem).export({ format: "jwk" });
+  const key = createPublicKey(pem).export({ format: "jwk" });
   return { ...key, kid: "test-key", alg: "RS256", use: "sig" };
 }
 
